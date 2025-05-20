@@ -3,10 +3,10 @@ pipeline {
 
     stages {
       stage('Checkout') {
-            steps {
-                git 'https://github.com/Tissmax/Jenkins-Docker'
-            }
-        }
+    steps {
+        git branch: 'main', url: 'https://github.com/Tissmax/Jenkins-Docker'
+    }
+}
       stage('Verify Files') {
             steps {
                 sh 'if [ -f index.html ] && [ -f Dockerfile ]; then echo "Files OK"; else exit 1; fi'
