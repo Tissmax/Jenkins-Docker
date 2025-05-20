@@ -4,7 +4,7 @@ pipeline {
     stages {
       stage('Checkout') {
             steps {
-                git 'https://github.com/Tissmax/Jenkins-Docker.git'
+                git 'https://github.com/Tissmax/Jenkins-Docker'
             }
         }
       stage('Verify Files') {
