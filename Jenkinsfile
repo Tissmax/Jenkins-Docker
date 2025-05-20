@@ -13,35 +13,39 @@ pipeline {
             }
         }
 
-        stage('Ajout de la date') {
-          DATE=$(date '+%Y-%m-%d %H:%M:%S')
-          cat <<EOF > index.html
-          <!DOCTYPE html>
-          <html lang="fr">
-          <head>
-            <meta charset="UTF-8">
-            <title>Déploiement Jenkins</title>
-            <style>
-            body {
-              font-family: Arial, sans-serif;
-              background-color: #f4f4f4;
-              text-align: center;
-              padding: 50px;
-            }
-            .timestamp {
-              font-size: 1.5em;
-              color: #333;
-            }
-            </style>
-          </head>
-          <body>
-            <h1>Déploiement réussi 🎉</h1>
-            <p>Ce fichier a été généré le :</p>
-            <p class="timestamp">$DATE</p>
-          </body>
+stage('Ajout de la date') {
+    steps {
+        sh '''
+        DATE=$(date '+%Y-%m-%d %H:%M:%S')
+        cat <<EOF > index.html
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+          <meta charset="UTF-8">
+          <title>Déploiement Jenkins</title>
+          <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+          }
+          .timestamp {
+            font-size: 1.5em;
+            color: #333;
+          }
+          </style>
+        </head>
+        <body>
+          <h1>Déploiement réussi 🎉</h1>
+          <p>Ce fichier a été généré le :</p>
+          <p class="timestamp">$DATE</p>
+        </body>
         </html>
         EOF
-        }
+        '''
+    }
+}
       stage('Build Image') {
             steps {
                 sh 'docker build -t monsite-docker .'
