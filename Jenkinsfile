@@ -59,3 +59,4 @@ stage('Ajout de la date') {
           }
       }
     }
+}
